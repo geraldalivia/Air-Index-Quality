@@ -104,9 +104,9 @@ if options == "Daily PM10 Pattern":
     st.pyplot(plt)
 
     st.info("""
-    **Insights about PM10 Daily Patterns:**
-            - Both stations show a pattern with two peaks. One in the morning (around 8-9 AM) and another in the evening (around 9-10 PM)
-            - The evening peak was more pronounced, with PM10 levels reaching a maximum around 21:00 (9 PM), reaching values of around 130 at both stations. However, the lowest concentrations were recorded during the day between 13:00-15:00 (1-3 PM)
+    **Insights about PM10 Daily Patterns:** <br>
+            - Both stations show a pattern with two peaks. One in the morning (around 8-9 AM) and another in the evening (around 9-10 PM) <br>
+            - The evening peak was more pronounced, with PM10 levels reaching a maximum around 21:00 (9 PM), reaching values of around 130 at both stations. However, the lowest concentrations were recorded during the day between 13:00-15:00 (1-3 PM) <br>
             - Dongsi and Wanliu stations show almost identical patterns, indicating that this phenomenon is regional and not just related to a particular location
     """)
 
