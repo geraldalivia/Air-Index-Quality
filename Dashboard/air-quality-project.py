@@ -100,7 +100,7 @@ def preprocess_data(df):
     return df, dongsi_data, wanliu_data
 
 # Preprocess data
-df, dongsi_data, wanliu_data = preprocess_data(df)
+df, dongsi_data, wanliu_data = preprocess_data(data)
 
 # Sidebar for navigation
 st.sidebar.title("Air Quality Analysis Dashboard")
