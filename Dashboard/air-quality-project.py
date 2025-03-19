@@ -191,28 +191,6 @@ elif options == "Weather Effects on PM10":
         plt.grid(True, alpha=0.3)
         st.pyplot(fig)
     
-    
-    # Temperature vs PM10
-    st.write("PM10 vs Temperature")
-    fig, ax = plt.subplots()
-    sns.scatterplot(data=data, x='TEMP', y='PM10', hue='station', ax=ax)
-    plt.title('PM10 vs Temperature')
-    st.pyplot(fig)
-
-    # Dew Point vs PM10
-    st.write("PM10 vs Dew Point")
-    fig, ax = plt.subplots()
-    sns.scatterplot(data=data, x='DEWP', y='PM10', hue='station', ax=ax)
-    plt.title('PM10 vs Dew Point')
-    st.pyplot(fig)
-
-    # Pressure vs PM10
-    st.write("PM10 vs Pressure")
-    fig, ax = plt.subplots()
-    sns.scatterplot(data=data, x='PRES', y='PM10', hue='station', ax=ax)
-    plt.title('PM10 vs Pressure')
-    st.pyplot(fig)
-
     st.info("""
     **Insights about PM10 Daily Patterns:**\n
     - It is noted on the scatter plot of PM10 concentration and TEMP that PM10 concentration tends to increase when the temperature is below 0°C. In line with Temperature, Dew point (DEWP) also follows a similar pattern but with more scatter in its relationship\n
