@@ -43,19 +43,11 @@ def load_data():
     data = pd.read_csv(output)
     return data
 try:
-    data = load_data()
-    st.write(f"Data berhasil dimuat: {data.shape[0]} baris")
+    df = load_data()
+    st.write(f"Succes to load data {data.shape[0]} baris")
     st.dataframe(data.head())
 except Exception as e:
     st.error(f"Error: {e}")
-
-# Load the dataset
-@st.cache
-def load_data():
-    df = pd.read_csv("Data_Dongsi_Wanliu.csv")
-    df['datetime'] = pd.to_datetime(df[['year', 'month', 'day', 'hour']])
-    return df
-
 
 # Display raw data sample
 with st.expander("Dataset Overview"):
@@ -78,10 +70,42 @@ with st.expander("Dataset Overview"):
         })
         st.dataframe(missing_df)
 
+# Data preprocessing
+@st.cache_data
+def preprocess_data(data):
+    # Create datetime column
+    if 'datetime' not in data.columns:
+        data['datetime'] = pd.to_datetime(data[['year', 'month', 'day', 'hour']])
+    
+    # Extract time components
+    data['day_of_week'] = data['datetime'].dt.dayofweek
+    data['hour_of_day'] = data['datetime'].dt.hour
+    data['month_name'] = data['datetime'].dt.month_name()
+    data['year_month'] = data['datetime'].dt.strftime('%Y-%m')
+    
+    # Impute missing values
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    for column in numeric_cols:
+        if data[column].isnull().sum() > 0:
+            data[column].fillna(data[column].median(), inplace=True)
+    
+    # Filter for stations of interest
+    dongsi_data = data[data['station'] == 'Dongsi'].copy()
+    wanliu_data = data[data['station'] == 'Wanliu'].copy()
+    
+    return data, dongsi_data, wanliu_data
+
+# Preprocess data
+data, dongsi_data, wanliu_data = preprocess_data(data)
+
 
 # Sidebar for navigation
 st.sidebar.title("Air Quality Analysis Dashboard")
-options = st.sidebar.selectbox("Select Analysis", ["Daily PM10 Pattern", "Weather Effects on PM10", "Further Analysis", "Conclusion"])
+options = st.sidebar.selectbox("Select Analysis", 
+                               ["Daily PM10 Pattern", 
+                                "Weather Effects on PM10", 
+                                "Further Analysis", 
+                                "Conclusion"])
 
 
 # Daily PM10 Pattern
@@ -89,7 +113,7 @@ if options == "Daily PM10 Pattern":
     st.title("Daily PM10 Concentration Pattern (2013-2017)")
     
     # Filter data for the selected stations
-    station = st.sidebar.selectbox("Select Station", ["Dongsi", "Wanliu"])
+    station = data['station'].value_counts()
     
     # Hourly average PM10
     hourly_pattern = data[data['station'] == station].groupby('hour')['PM10'].mean()
@@ -153,6 +177,16 @@ elif options == "Weather Effects on PM10":
 
     # Scatter plots for interactive analysis
     st.subheader("Scatter Plots")
+    meteo_factor = st.selectbox(
+        "Select Meteorological Factor", 
+        ["TEMP", "DEWP", "PRES"],
+        key="meteo_dist"
+    )
+    fig = px.histogram(data, x=meteo_factor, color='station', nbins=50,
+                      barmode='overlay', opacity=0.7,
+                      title=f'Distribution of {meteo_factor} by Station',
+                      labels={meteo_factor: meteo_factor, 'count': 'Frequency'})
+    st.plotly_chart(fig, use_container_width=True)
     
     # Temperature vs PM10
     st.write("PM10 vs Temperature")
@@ -223,6 +257,7 @@ elif options == "Further Analysis":
 # Conclusion
 elif options == "Conclusion":
     st.title("Conclution Question 1 [What is the daily pattern of PM10 concentrations at Dongsi and Wanliu stations for the period 2013-2017?]")
+    
     st.info("""
     **PM10 Daily Patterns**\n
     ****
