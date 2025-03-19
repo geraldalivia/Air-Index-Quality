@@ -21,7 +21,8 @@ st.markdown("""
 - **Dicoding ID**: [MC299D5X1168](https://www.dicoding.com/users/alddar/)
 
 ### Project Overview
-This project aims to analyze air quality data from Dongsi and Wanliu stations in China from 2013 to 2017, focusing on PM10 concentrations by examining daily patterns and investigating correlations with meteorological factors. The insights gained will enhance the understanding of pollution patterns and their driving factors, contributing to more effective air quality management strategies. The findings can guide policy decisions on traffic management and emission controls, help residents plan outdoor activities to avoid peak pollution hours, provide scientific evidence for environmental protection measures, support urban planning that considers air quality factors, and contribute to public health initiatives by identifying high-risk pollution periods.
+This project aims to analyze air quality data from Dongsi and Wanliu stations in China from 2013 to 2017, focusing on PM10 concentrations and Meteorological Parameter (TEMp, DEWP, and PRES) Effect.
+This project provides a set of functions to visualize the hourly and monthly patterns of PM10 concentration in air quality data. The visualizations help in understanding the trends of air pollution across different time frames
 
 ### Define Question  
 1. What is the daily pattern of PM10 concentrations at Dongsi and Wanliu stations for the period 2013-2017?
@@ -30,7 +31,7 @@ This project aims to analyze air quality data from Dongsi and Wanliu stations in
 
 
 # Load Data from gdrive
-file_id = "1tmW2HhqbVgr8Tz4aT4vgf6ejvs_vX6Ox"
+file_id = "1--d07m7J4CniV6pfScx_S6sde5XJu05J"
 output = "data.csv"
 url = f'https://drive.google.com/uc?id={file_id}'
 
