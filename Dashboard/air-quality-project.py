@@ -116,10 +116,10 @@ if options == "Daily PM10 Pattern":
     st.title("Daily PM10 Concentration Pattern (2013-2017)")
     
     # Filter data for the selected stations
-    station = data['station'].value_counts()
+    station = df['station'].value_counts()
     
     # Hourly average PM10
-    hourly_pattern = data[data['station'] == station].groupby('hour')['PM10'].mean()
+    hourly_pattern = df[df['station'] == station].groupby('hour')['PM10'].mean()
     plt.figure(figsize=(12, 6))
     plt.plot(hourly_pattern.index, hourly_pattern.values, marker='o', label=station)
     plt.title(f'Daily Pattern of PM10 Concentration at {station} (2013-2017)')
@@ -138,7 +138,7 @@ if options == "Daily PM10 Pattern":
     """)
 
     # Monthly average PM10
-    hourly_pattern = data[data['station'] == station].groupby('month')['PM10'].mean()
+    hourly_pattern = df[df['station'] == station].groupby('month')['PM10'].mean()
     plt.figure(figsize=(12, 6))
     plt.plot(hourly_pattern.index, hourly_pattern.values, marker='o', label=station)
     plt.title(f'Daily Pattern of PM10 Concentration at {station} (2013-2017)')
