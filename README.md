@@ -15,19 +15,17 @@ Python 3.13.0
 Library : 
 - Streamlit
 - Pandas
-- Numpy
 - Matplotlib
 - Seaborn
 - Gdown
-- Scipy
-  
+
 1. Clone this repository to your local machine
    ```
    git clone https://github.com/yourusername/air-quality-analysis.git
    ```
 2. Install the reired library or packages by running this command on your terminal
    ```
-   pip install pandas numpy matplotlib gdown scipy seaborn streamlit
+   pip install pandas matplotlib gdown seaborn streamlit
    ```
    or by the following command:
    ```
