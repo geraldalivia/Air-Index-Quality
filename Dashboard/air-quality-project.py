@@ -40,10 +40,10 @@ url = f'https://drive.google.com/uc?id={file_id}'
 def load_data():
     # Download file
     gdown.download(url, output, quiet=False)
-    data = pd.read_csv(output)
-    return data
+    df = pd.read_csv(output)
+    return df
 try:
-    df = load_data()
+    data = load_data()
     st.write(f"Succes to load data {data.shape[0]} baris")
     st.dataframe(data.head())
 except Exception as e:
