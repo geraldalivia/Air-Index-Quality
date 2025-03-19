@@ -241,7 +241,7 @@ elif options == "Conclusion":
     st.title("Conclution Question 1 [What is the daily pattern of PM10 concentrations at Dongsi and Wanliu stations for the period 2013-2017?]")
     
     st.info("""
-    **PM10 Daily Patterns**\n
+    **PM10 Daily Patterns**
     ****
     **Findings:**\n
     - Highest Point: Occurred at 21:00 (9 PM) with values of 130.3 in Dongsi and 129.7 in Wanliu\n
@@ -252,7 +252,7 @@ elif options == "Conclusion":
     - The evening peak is due to a combination of afternoon/evening transportation activities and more stable atmospheric layer conditions at night (temperature inversion)\n
     - The low PM10 concentration during the day is likely due to the increased height of the atmospheric mixing layer and thermal turbulence that aids pollutant dispersion\n
     
-    **Seasonal Patterns of PM10 Concentrations (2013-2017)**\n
+    **Seasonal Patterns of PM10 Concentrations (2013-2017)**
     ****
     **Findings:**\n
     - Month with Highest PM10: March with values of 142.6 in Dongsi and 146.3 in Wanliu\n
@@ -265,7 +265,7 @@ elif options == "Conclusion":
     
     st.title("Conclusion Question 2 [What are the specific effects of temperature (TEMP), dew point(DEWP), and air pressure (PRES) on PM10 at Dongsi and Wanliu stations over the past 12 months?]")
     st.info("""
-    **Effects of Weather Parameters on PM10 (Last 12 Months)**\n
+    **Effects of Weather Parameters on PM10 (Last 12 Months)**
     ****
     **Findings:**\n
     1. Temperature (TEMP)\n
@@ -282,7 +282,7 @@ elif options == "Conclusion":
     - Low temperatures are often associated with thermal inversions that trap pollutants near the ground surface\n
     - High pressure is usually associated with stable air and lack of atmospheric gas mixing, resulting in pollutants accumulating\n
     
-    **Patterns by Temperature Category (Advanced Analysis)**\n
+    **Patterns by Temperature Category (Advanced Analysis)**
     ****
     **Findings:**\n
     - Cold Conditions (<0°C): Show the highest PM10 concentrations throughout the day, especially at night\n
@@ -296,17 +296,17 @@ elif options == "Conclusion":
     ****
     - Encourage the use of public transportation to reduce the use of private vehicles\n
     
-    **Seasonality**\n
+    **Seasonality**
     ****
     - Improve monitoring and enforcement of industrial emissions during December-March when PM10 concentrations are highest\n
     - Develop an early warning system for air quality based on meteorological forecasts, especially during low temperature conditions\n
     - Implement operational restrictions on emission sources (private vehicles, heaters, etc.) during periods of cold air with high pressure\n
     
-    **Energy Management**\n
+    **Energy Management**
     ****
     - Introduce and support programs to switch from vehicles with carbon-based fuels to renewable energy\n
             
-    **Public Health Policy**\n
+    **Public Health Policy**
     ****  
     - Raise public awareness about the risks of PM10 exposure, especially during low temperatures and high pressures\n
     - Provide customized health recommendations for vulnerable groups (children, elderly, respiratory disease sufferers) based on identified daily and seasonal patterns\n
