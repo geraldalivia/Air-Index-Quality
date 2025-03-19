@@ -49,6 +49,10 @@ try:
 except Exception as e:
     st.error(f"Error: {e}")
 
+@st.cache
+def load_data():
+    df = pd.read_csv("Data_Dongsi_Wanliu.csv")
+
 # Display raw data sample
 with st.expander("Dataset Overview"):
     st.dataframe(data.head())
