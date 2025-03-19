@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import gdown
-from datetime import datetime, timedelta
 
 # Title page
 st.set_page_config(page_title=" Air Quality Analysis by Geralda Livia")
@@ -77,16 +76,16 @@ with st.expander("Dataset Overview"):
 
 # Data preprocessing
 @st.cache_data
-def preprocess_data(data):
+def preprocess_data(df):
     # Create datetime column
     if 'datetime' not in data.columns:
-        data['datetime'] = pd.to_datetime(data[['year', 'month', 'day', 'hour']])
+        df['datetime'] = pd.to_datetime(data[['year', 'month', 'day', 'hour']])
     
     # Extract time components
-    data['day_of_week'] = data['datetime'].dt.dayofweek
-    data['hour_of_day'] = data['datetime'].dt.hour
-    data['month_name'] = data['datetime'].dt.month_name()
-    data['year_month'] = data['datetime'].dt.strftime('%Y-%m')
+    df['day_of_week'] = df['datetime'].dt.dayofweek
+    df['hour_of_day'] = df['datetime'].dt.hour
+    df['month_name'] = df['datetime'].dt.month_name()
+    df['year_month'] = df['datetime'].dt.strftime('%Y-%m')
     
     # Impute missing values
     numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
@@ -95,14 +94,13 @@ def preprocess_data(data):
             data[column].fillna(data[column].median(), inplace=True)
     
     # Filter for stations of interest
-    dongsi_data = data[data['station'] == 'Dongsi'].copy()
-    wanliu_data = data[data['station'] == 'Wanliu'].copy()
+    dongsi_data = df[df['station'] == 'Dongsi'].copy()
+    wanliu_data = df[df['station'] == 'Wanliu'].copy()
     
-    return data, dongsi_data, wanliu_data
+    return df, dongsi_data, wanliu_data
 
 # Preprocess data
-data, dongsi_data, wanliu_data = preprocess_data(data)
-
+df, dongsi_data, wanliu_data = preprocess_data(df)
 
 # Sidebar for navigation
 st.sidebar.title("Air Quality Analysis Dashboard")
