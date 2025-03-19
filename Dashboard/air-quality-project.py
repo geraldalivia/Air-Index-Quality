@@ -161,34 +161,36 @@ if options == "Daily PM10 Pattern":
 # Weather Effects on PM10
 elif options == "Weather Effects on PM10":
     st.title("Weather Effects on PM10 Concentration")
-    
-    # Correlation analysis
-    st.subheader("Correlation Heatmap")
-    corr = data[['PM10', 'TEMP', 'DEWP', 'PRES']].corr()
-    
+
+     # Correlation analysis
+    st.subheader("Overall Correlation Data")
+    overall_corr = data[['PM10', 'TEMP', 'DEWP', 'PRES']].corr()
+    st.write(overall_corr)
+
+    # User selection for correlation parameters
+    st.subheader("Select Weather Parameters for Correlation Analysis")
+    selected_params = st.multiselect("Choose parameters to analyze with PM10", ['TEMP', 'DEWP', 'PRES'], default=['TEMP', 'DEWP', 'PRES'])
+
+    # Filter the correlation data based on user selection
+    selected_corr = data[['PM10'] + selected_params].corr()
+
+    # Display selected correlation heatmap
     plt.figure(figsize=(10, 8))
-    sns.heatmap(corr, annot=True, cmap='YlGnBu', vmin=-1, vmax=1)
-    plt.title('Correlation between PM10 and Weather Parameters')
+    sns.heatmap(selected_corr, annot=True, cmap='YlGnBu', vmin=-1, vmax=1)
+    plt.title('Correlation between PM10 and Selected Weather Parameters')
     st.pyplot(plt)
 
-    st.info("""
-    **Insights about PM10 Daily Patterns:**\n
-    - Temperature (TEMP) and Dew Point (DEWP) showed a negative correlation at both stations. For TEMP it is about -0.27 at Dongsi and -0.22 at Wanliu. For DEWP it is about -0.055 at Dongsi and -0.028 at Wanliu\n
-    - Air Pressure (PRES) shows a weak positive correlation at both stations. About 0.074 at Dongsi and 0.029 at Wanliu\n
-    """)
-
-    # Scatter plots for interactive analysis
-    st.subheader("Scatter Plots")
-    meteo_factor = st.selectbox(
-        "Select Meteorological Factor", 
-        ["TEMP", "DEWP", "PRES"],
-        key="meteo_dist"
-    )
-    fig = px.histogram(data, x=meteo_factor, color='station', nbins=50,
-                      barmode='overlay', opacity=0.7,
-                      title=f'Distribution of {meteo_factor} by Station',
-                      labels={meteo_factor: meteo_factor, 'count': 'Frequency'})
-    st.plotly_chart(fig, use_container_width=True)
+    # Scatter plots for selected parameters
+    st.subheader("Scatter Plots for Selected Parameters")
+    for param in selected_params:
+        fig, ax = plt.subplots()
+        sns.scatterplot(data=data, x=param, y='PM10', hue='station', ax=ax)
+        plt.title(f'PM10 vs {param}')
+        plt.xlabel(param)
+        plt.ylabel('PM10')
+        plt.grid(True, alpha=0.3)
+        st.pyplot(fig)
+    
     
     # Temperature vs PM10
     st.write("PM10 vs Temperature")
