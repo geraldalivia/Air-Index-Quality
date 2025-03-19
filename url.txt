@@ -1,3 +1,2 @@
 Live Dashboard
-
-https://analysis-air-quality-geraldalivia.streamlit.app/
+https://air-index-quality-alddar.streamlit.app/
