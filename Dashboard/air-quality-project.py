@@ -114,12 +114,11 @@ options = st.sidebar.selectbox("Select Analysis",
 # Daily PM10 Pattern
 if options == "Daily PM10 Pattern":
     st.title("Daily PM10 Concentration Pattern (2013-2017)")
-    
-    # Filter data for the selected stations
-    station = df['station'].value_counts()
-    
+
     # Hourly average PM10
-    hourly_pattern = df[df['station'] == station].groupby('hour')['PM10'].mean()
+    station = st.selectbox("Select Station", ["Dongsi", "Wanliu"])
+    
+    hourly_pattern = data[data['station'] == station].groupby('hour')['PM10'].mean()
     plt.figure(figsize=(12, 6))
     plt.plot(hourly_pattern.index, hourly_pattern.values, marker='o', label=station)
     plt.title(f'Daily Pattern of PM10 Concentration at {station} (2013-2017)')
@@ -129,7 +128,7 @@ if options == "Daily PM10 Pattern":
     plt.grid(True, alpha=0.3)
     plt.legend()
     st.pyplot(plt)
-
+    
     st.info("""
     **Insights about PM10 Daily Patterns:**\n
     - Both stations show a pattern with two peaks. One in the morning (around 8-9 AM) and another in the evening (around 9-10 PM)\n
