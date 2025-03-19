@@ -209,7 +209,7 @@ elif options == "Further Analysis":
     hourly_temp_pm10 = data.groupby(['station', 'temp_category', 'hour'])['PM10'].mean().reset_index()
     
     # Interactive selection for temperature category
-    selected_temp_category = st.sidebar.selectbox("Select Temperature Category", ['Cold (<0°C)', 'Cool (0-10°C)', 'Mild (10-20°C)', 'Warm (>20°C)'])
+    selected_temp_category = st.selectbox("Select Temperature Category", ['Cold (<0°C)', 'Cool (0-10°C)', 'Mild (10-20°C)', 'Warm (>20°C)'])
     
     # Filter data based on selected temperature category
     filtered_data = hourly_temp_pm10[hourly_temp_pm10['temp_category'] == selected_temp_category]
